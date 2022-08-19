@@ -1,61 +1,23 @@
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
-import axios from "axios"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Section from "./styles";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-function Login({ user, setUser }) {
+function Login() {
 
-    const history = useHistory()
+    const { onSubmit } = useContext(UserContext)
 
     const formSchema = yup.object().shape({
-        email: yup.string().required("Email necessário"),
+        email: yup.string().email("Email inválido").required("Email necessário"),
         password: yup.string().required("Senha necessária")
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(formSchema)
     })
-
-    const onSubmit = (data) => {
-        axios
-            .post("https://kenziehub.herokuapp.com/sessions", data)
-            .then(response => {
-                console.log(response)
-                window.localStorage.clear();
-                window.localStorage.setItem("@user", JSON.stringify(response.data.user))
-                window.localStorage.setItem("@userId", response.data.user.id)
-                window.localStorage.setItem("@token", response.data.token)
-                toast.success("Login realizado com sucesso!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                history.push(`/dashboard`)
-                setUser(response.data.user)
-            })
-            .catch(error => {
-                console.log(error)
-                toast.error("Email ou senha incorretos", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            })
-    }
 
     return (
         <>
@@ -68,15 +30,17 @@ function Login({ user, setUser }) {
                     <div>
                         <label>Email</label>
                         <input type="text" placeholder="Digite aqui seu email" {...register("email")} />
+                        <span>{errors.email?.message}</span>
+                    </div>
+                    <div>
                         <label>Senha</label>
                         <input type="password" placeholder="Digite aqui sua senha" {...register("password")} />
-                        <button type="submit">Entrar</button>
+                        <span>{errors.password?.message}</span>
                     </div>
+                        <button type="submit">Entrar</button>
                     <p>Ainda não possui uma conta?</p>
                     <Link to="/register"><button>Cadastre-se</button></Link>
                 </form>
-                <span>{errors.password?.message}</span>
-                <span>{errors.email?.message}</span>
             </Section>
         </>
     )

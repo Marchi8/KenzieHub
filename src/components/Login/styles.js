@@ -26,7 +26,7 @@ const Section = styled.section`
         font-style: normal;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         h1{
         font-size: 27px;
         line-height: 130px;
@@ -39,7 +39,6 @@ const Section = styled.section`
         flex-direction: column;
         justify-content: center;
         width: 296px;
-        gap: 20px;
         height: 402.69px;
         margin-top: 10px;
         background: #212529;
@@ -47,20 +46,19 @@ const Section = styled.section`
         border-radius: 3.20867px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         form{
         width: 369px;
         height: 502px;
         }
 }
 
-    div{
+    form>div{
         display: flex;
         flex-direction: column;
-        width: 90%;
-        height: 100%;
+        height: 95px;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: flex-start;
     }
 
     h3{
@@ -72,11 +70,11 @@ const Section = styled.section`
         font-size: 14.439px;
         line-height: 22px;
         color: #F8F9FA;
-        margin-top: 33.69px;
-        margin-bottom: 0px;
+        margin-top: 30px;
+        margin-bottom: 40px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         h3{
         width: 49px;
         height: 28px;
@@ -86,7 +84,6 @@ const Section = styled.section`
 }
 
     label{
-        background-color: #F8F9FA;
         height: 0px;
         font-family: 'Inter';
         font-style: normal;
@@ -99,7 +96,7 @@ const Section = styled.section`
         margin-bottom: 10px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         label{
         font-size: 12.182px;
         margin-left: -290px;
@@ -107,8 +104,13 @@ const Section = styled.section`
 }
 
     span{
-        color: #F8F9FA;
-        margin-bottom: 10px;
+        color: red;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        margin-top: -17px;
+        margin-left: -200px;
     }
 
     input{
@@ -131,7 +133,7 @@ const Section = styled.section`
         margin-bottom: 20px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         input{
         width: 310px;
         height: 48px;
@@ -162,10 +164,11 @@ const Section = styled.section`
         font-size: 12.8347px;
         line-height: 21px;
         text-decoration: none;
+        margin-bottom: 10px;
         cursor: pointer;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         button{
             width: 324px;
             height: 48px;
@@ -187,9 +190,11 @@ const Section = styled.section`
         font-weight: 600;
         font-size: 9.62602px;
         line-height: 14px;
+        margin-bottom: 20px;
+        margin-top: 0px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         p{
             width: 170px;
             height: 18px;
@@ -212,7 +217,7 @@ const Section = styled.section`
         margin-top: -10px;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         a>button{
             font-size: 16px;
             line-height: 26px;

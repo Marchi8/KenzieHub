@@ -1,17 +1,15 @@
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
-import axios from "axios"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Link, useHistory } from "react-router-dom"
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { Link } from "react-router-dom"
 import { Header, Section } from "./styles"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
 
 function Register() {
 
-    const history = useHistory()
-
+    const { createLog } = useContext(UserContext)
 
     const formSchema = yup.object().shape({
         name: yup.string().required("Nome necessário!"),
@@ -31,38 +29,6 @@ function Register() {
         resolver: yupResolver(formSchema)
     })
 
-    const onSubmit = (data) => {
-        axios
-            .post("https://kenziehub.herokuapp.com/users", data)
-            .then(response => {
-                console.log(response)
-                toast.success("Conta criada com sucesso!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                history.push(`/`)
-            })
-            .catch(error => {
-                console.log(error)
-                toast.error("Ops! Algo deu errado", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            })
-    }
-
     return (
         <>
             <Header>
@@ -70,7 +36,7 @@ function Register() {
                 <Link to="/"><button>Voltar</button></Link>
             </Header>
             <Section>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(createLog)}>
                     <div>
                         <h1>Crie sua conta</h1>
                         <p>Rápido e grátis, vamos nessa</p>
@@ -109,7 +75,6 @@ function Register() {
                         <li><span>{errors.course_module?.message}</span></li>
                     </ul>
                 </section>
-
             </Section>
         </>
     )

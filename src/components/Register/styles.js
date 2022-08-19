@@ -18,7 +18,7 @@ const Header = styled.header`
         font-style: normal;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         h1{
            font-size: 25px;
            margin-top: 45px;
@@ -51,7 +51,7 @@ const Header = styled.header`
         cursor: pointer;
     }
 
-    @media(min-width:1024px) {
+    @media(min-width:946px) {
         button{
             width: 67.49px;
             height: 40.11px;
@@ -75,7 +75,7 @@ form {
     justify-content: flex-start;
 }
 
-@media(min-width:1024px) {
+@media(min-width:946px) {
         form{
             width: 370px;
             height: 891.19px;
@@ -95,7 +95,7 @@ h1{
     margin-top: -10px;
 }
 
-@media(min-width:1024px) {
+@media(min-width:946px) {
         h1{
             width: 127px;
             height: 28px;
@@ -119,7 +119,7 @@ p{
     margin-bottom: 20px;
 }
 
-@media(min-width:1024px) {
+@media(min-width:946px) {
         p{
             width: 166px;
             height: 22px;
@@ -152,7 +152,7 @@ label {
     display: flex;
 }
 
-@media(min-width:1024px) {
+@media(min-width:946px) {
         label {
             font-size: 12.182px;
             width:auto;
@@ -180,7 +180,7 @@ input {
     line-height: 21px;
 }
 
-@media(min-width:1024px) {
+@media(min-width:946px) {
         input {
             width: 310px;
             height: 48px;
@@ -214,7 +214,7 @@ input:focus {
     margin-bottom: 16px;
   }
 
-  @media(min-width:1024px) {
+  @media(min-width:946px) {
         select {
             width: 335px;
             height: 48px;
@@ -244,7 +244,7 @@ input:focus {
     cursor: pointer;
   }
 
-  @media(min-width:1024px) {
+  @media(min-width:946px) {
         button {
             width: 326px;
             height: 48px;
