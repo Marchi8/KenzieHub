@@ -6,6 +6,15 @@ import { Header, Section } from "./styles"
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 
+export interface Ierrors {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    bio: string;
+    contact: string;
+    course_module: string;
+}
 
 function Register() {
 
@@ -25,7 +34,7 @@ function Register() {
         course_module: yup.string().required("Módulo necessário!")
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<Ierrors>({
         resolver: yupResolver(formSchema)
     })
 
@@ -36,7 +45,7 @@ function Register() {
                 <Link to="/"><button>Voltar</button></Link>
             </Header>
             <Section>
-                <form onSubmit={handleSubmit(createLog)}>
+                <form onSubmit={handleSubmit(createLog as any)}>
                     <div>
                         <h1>Crie sua conta</h1>
                         <p>Rápido e grátis, vamos nessa</p>

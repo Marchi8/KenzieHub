@@ -1,17 +1,46 @@
 import axios from "axios";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { createContext } from "react";
 import { toast } from 'react-toastify';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const UserContext = createContext({})
+export const UserContext = createContext<IuseAuth>({} as IuseAuth)
 
-function UserProvider({ children }) {
 
-    const [user, setUser] = useState()
-    const history = useHistory()
+export interface UserData {
+    email: string;
+    password: string;
+}
 
-    const onSubmit = (data) => {
+export interface UserProps {
+    children: ReactNode;
+}
+
+export interface IuseAuth {
+    user: string;
+    // setUser: string;
+    onSubmit: (data: UserData) => void;
+    createLog: (data: Icadastro) => void;
+}
+
+export interface Icadastro {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    bio: string;
+    contact: string;
+    course_module: string;
+}
+
+function UserProvider({ children }: UserProps) {
+
+    const navigate = useNavigate()
+
+    const [user, setUser] = useState<string>("")
+
+    
+    const onSubmit = (data: UserData) => {
         axios
             .post("https://kenziehub.herokuapp.com/sessions", data)
             .then(response => {
@@ -30,7 +59,7 @@ function UserProvider({ children }) {
                     progress: undefined,
                     theme: "dark",
                 });
-                history.push(`/dashboard`)
+                navigate(`/dashboard`, { replace: true })
             })
             .catch(error => {
                 console.log(error)
@@ -47,7 +76,7 @@ function UserProvider({ children }) {
             })
     }
 
-    const createLog = (data) => {
+    const createLog = (data: Icadastro) => {
         axios
             .post("https://kenziehub.herokuapp.com/users", data)
             .then(response => {
@@ -62,7 +91,7 @@ function UserProvider({ children }) {
                     progress: undefined,
                     theme: "dark",
                 });
-                history.push(`/`)
+                navigate(`/`, { replace: true })
             })
             .catch(error => {
                 console.log(error)
@@ -80,7 +109,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ user, setUser, onSubmit, createLog }}>
+        <UserContext.Provider value={{ user, onSubmit, createLog }}>
             {children}
         </UserContext.Provider>
     )

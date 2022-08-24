@@ -3,18 +3,23 @@ import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-function Technology({ tech, setTech }) {
+interface Itech {
+    id: string;
+    status: string;
+    title: string;
+}
 
+function Technology({ tech, setTech }: any) {
     const token = window.localStorage.getItem("@token")
 
-    const remove = (techId) => {
+    const remove = (techId: Itech) => {
         axios
             .delete(`https://kenziehub.herokuapp.com/users/techs/${techId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then((res) => {
                 console.log(res)
-                const filter = tech.filter((techs) => techId !== techs.id)
+                const filter = tech.filter((techs: { id: Itech; }) => techId !== techs.id)
                 setTech(filter)
                 toast.success("Tecnologia removida!", {
                     position: "top-right",
@@ -44,11 +49,11 @@ function Technology({ tech, setTech }) {
 
     return (
         <>
-            {tech?.map((tech) => (
+            {tech?.map((tech: Itech) => (
                 <Li key={tech.id}>
                     <h1>{tech.title}</h1>
                     <p>{tech.status}</p>
-                    <button onClick={() => remove(tech.id)}><FaTrashAlt /></button>
+                    <button onClick={() => remove(tech.id as unknown as Itech)}><FaTrashAlt /></button>
                 </Li>
             ))}
         </>

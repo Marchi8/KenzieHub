@@ -1,11 +1,16 @@
-import { ModalAdd, ModalBackground } from "./Modal.js"
+import { ModalAdd, ModalBackground } from "./Modal"
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-function ModalTech(props) {
+export interface Itech {
+    name: string;
+    status: string;
+}
+
+function ModalTech(props: any) {
 
     const token = window.localStorage.getItem("@token")
 
@@ -14,7 +19,7 @@ function ModalTech(props) {
         status: yup.string().required("Status necessário")
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<Itech>({
         resolver: yupResolver(formSchema)
     })
 
@@ -26,7 +31,7 @@ function ModalTech(props) {
         setTimeout(reload, 1500)
     }
 
-    const postTech = (data) => {
+    const postTech = (data: Itech) => {
         console.log(data)
         axios
             .post("https://kenziehub.herokuapp.com/users/techs", {

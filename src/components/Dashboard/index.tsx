@@ -1,17 +1,26 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Main } from "./styles"
 import axios from "axios";
 import Technology from "../Techs";
 import ModalTech from "../Modal/ModalTech";
+import Login from "../Login";
+
+export interface Iresponse {
+    created_at: string;
+    id: string;
+    status: string;
+    title: string;
+    updated_at: string;
+}
 
 function Dashboard() {
 
-    const [tech, setTech] = useState()
-    const [show, setShow] = useState(false)
+    const [tech, setTech] = useState<Iresponse[]>([])
+    const [show, setShow] = useState<boolean>(false)
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const username = window.localStorage.getItem("@username")
     const usermodule = window.localStorage.getItem("@usermodule")
@@ -19,14 +28,18 @@ function Dashboard() {
     const userId = window.localStorage.getItem("@userId")
 
     useEffect(() => {
-        axios
-            .get(`https://kenziehub.herokuapp.com/users/${userId}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then(res => {
-                setTech(res.data.techs)
-            })
-            .catch(() => console.log("Faça Login!!!"))
+        if (!token) {
+            navigate(`/`, { replace: true })
+        } else {
+            axios
+                .get(`https://kenziehub.herokuapp.com/users/${userId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then(res => {
+                    setTech(res.data.techs)
+                })
+                .catch(() => console.log("Faça Login!!!"))
+        }
     }, [])
 
     if (token) {
@@ -58,7 +71,8 @@ function Dashboard() {
         )
     }
     else {
-        history.push(`/`)
+        // navigate(`/`, { replace: true })
+        return (<Login />)
     }
 }
 
