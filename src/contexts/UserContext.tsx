@@ -36,7 +36,7 @@ export interface IResponseUser {
     techs: any;
     token: string;
     user: IResponseUserData;
-    setUser: (any: any) => void;
+    setUser: (data: IResponseUserData) => void;
 }
 
 export interface IResponseUserData {
