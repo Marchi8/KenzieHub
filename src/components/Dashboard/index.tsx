@@ -6,19 +6,11 @@ import axios from "axios";
 import Technology from "../Techs";
 import ModalTech from "../Modal/ModalTech";
 import Login from "../Login";
-import { IResponseUserData } from "../../contexts/UserContext";
-
-export interface Iresponse {
-    created_at: string;
-    id: string;
-    status: string;
-    title: string;
-    updated_at: string;
-}
+import { IResponseUserData, ITechs } from "../../contexts/UserContext";
 
 function Dashboard() {
 
-    const [tech, setTech] = useState<Iresponse[]>([])
+    const [tech, setTech] = useState<ITechs[]>([])
     const [show, setShow] = useState<boolean>(false)
 
     const navigate = useNavigate()
