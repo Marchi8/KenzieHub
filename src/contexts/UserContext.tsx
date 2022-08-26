@@ -32,7 +32,8 @@ export interface ICadastro {
     course_module: string;
 }
 
-interface IResponseUser {
+export interface IResponseUser {
+    techs: any;
     token: string;
     user: IResponseUserData;
     setUser: (any: any) => void;
@@ -52,7 +53,7 @@ export interface IResponseUserData {
     works: IWorks[];
 }
 
-interface ITechs {
+export interface ITechs {
     created_at: string;
     id: string;
     status: string;
@@ -60,15 +61,10 @@ interface ITechs {
     updated_at: string;
 }
 
-interface IWorks {
+export interface IWorks {
     title: string;
     description: string;
     deploy_url: string;
-}
-
-interface IResponseUser {
-    token: string;
-    user: IResponseUserData;
 }
 
 function UserProvider({ children }: IUserProps) {

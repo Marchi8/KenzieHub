@@ -6,6 +6,7 @@ import axios from "axios";
 import Technology from "../Techs";
 import ModalTech from "../Modal/ModalTech";
 import Login from "../Login";
+import { IResponseUserData } from "../../contexts/UserContext";
 
 export interface Iresponse {
     created_at: string;
@@ -32,7 +33,7 @@ function Dashboard() {
             navigate(`/`, { replace: true })
         } else {
             axios
-                .get(`https://kenziehub.herokuapp.com/users/${userId}`, {
+                .get<IResponseUserData>(`https://kenziehub.herokuapp.com/users/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 .then(res => {
@@ -71,7 +72,6 @@ function Dashboard() {
         )
     }
     else {
-        // navigate(`/`, { replace: true })
         return (<Login />)
     }
 }
